@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import AddButton from "../../components/addTodo/AddButton";
 
 export default class AddTodo extends Component {
   state = {
@@ -18,13 +17,26 @@ export default class AddTodo extends Component {
                   newTodo: e.target.value,
                   isDisabled: e.target.value.length > 0 ? false : true,
                 });
+                
               }}
+              style={{textTransform:'capitalize'}}
             />
           </div>
-          <AddButton isDisabled={this.state.isDisabled} />
+          <div>
+            <button
+              disabled={this.state.isDisabled}
+              style={{ backgroundColor: "lightBlue" }}
+              onClick={(e)=>alert('Do you want to add new task "' +this.state.newTodo+'" to your list?')}
+            >
+              Add
+            </button>
+          </div>
+          {/* <AddButton isDisabled={this.state.isDisabled} /> */}
         </div>
         <br />
-        <div style={{height:'1em', textTransform:'capitalize', color:'teal'}}>
+        <div
+          style={{ height: "1em", textTransform: "capitalize", color: "teal" }}
+        >
           <p>{this.state.newTodo}</p>
         </div>
       </div>
