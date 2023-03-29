@@ -12,6 +12,9 @@ export default class AddTodo extends Component {
     });
   };
   render() {
+    const {addNewToDo}=this.props;
+    // console.log(addNewToDo);
+    
     return (
       <div>
         <div style={{ display: "flex", gap: "50px" }}>
@@ -26,12 +29,8 @@ export default class AddTodo extends Component {
             <button
               disabled={this.state.isDisabled}
               style={{ backgroundColor: "lightBlue" }}
-              onClick={(e) =>
-                alert(
-                  'Do you want to add new task "' +
-                    this.state.newTodo +
-                    '" to your list?'
-                )
+              onClick={() =>
+                addNewToDo(this.state.newTodo)
               }
             >
               Add

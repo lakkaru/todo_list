@@ -23,7 +23,7 @@ export default class Home extends Component {
   //         { message: "Thired ToDo", color: "green" },
   //       ],
   //     [
-        
+
   //         { message: "A ToDo", color: "#456789" },
   //         { message: "B ToDo", color: "#123456" },
   //         { message: "C ToDo", color: "#098765" },
@@ -31,30 +31,35 @@ export default class Home extends Component {
   //   ],
   // };
 
-  constructor(){
+  constructor() {
     super();
     this.state = {
-    todos: [
+      todos: 
         [
           { message: "First ToDo", color: "red" },
-          { message: "Second ToDo", color: "pink" },
-          { message: "Thired ToDo", color: "green" },
+          { message: "Second ToDo", color: "red" },
+          { message: "Thired ToDo", color: "red" },
         ],
-      [
-        
-          { message: "A ToDo", color: "#456789" },
-          { message: "B ToDo", color: "#123456" },
-          { message: "C ToDo", color: "#098765" },
-      ],
-    ],
-  };
+        // [
+        //   { message: "A ToDo", color: "#456789" },
+        //   { message: "B ToDo", color: "#123456" },
+        //   { message: "C ToDo", color: "#098765" },
+        // ],
+      
+    };
   }
 
-  addNewToDo= ()=>{
+  addNewToDo = (message) => {
+    // console.log(messageTxt);
+    
     this.setState({
-      todos:['New Todo', ...this.state.todos],
-    })
+      todos: [
+        { message: message, color: "red" },
+        ...this.state.todos,
+      ],
+    });
   };
+
 
   render() {
     return (
@@ -63,16 +68,16 @@ export default class Home extends Component {
         <div style={{ display: "flex", justifyContent: "center" }}>
           <div>
             <h2>ToDo List</h2>
-            <AddTodo />
+            <AddTodo addNewToDo={this.addNewToDo} />
             <br />
             <hr />
             <div>
-              <TodoList toDo={this.state.todos[0]} />
+              <TodoList toDo={this.state.todos} />
             </div>
-            <hr></hr>
+            {/* <hr></hr>
             <div>
               <TodoList toDo={this.state.todos[1]} />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
