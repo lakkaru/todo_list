@@ -5,6 +5,12 @@ export default class AddTodo extends Component {
     newTodo: "",
     isDisabled: true,
   };
+  handleInputValueChange = (e) => {
+    this.setState({
+      newTodo: e.target.value,
+      isDisabled: e.target.value.length > 0 ? false : true,
+    });
+  };
   render() {
     return (
       <div>
@@ -12,21 +18,21 @@ export default class AddTodo extends Component {
           <div>
             <input
               type="text"
-              onChange={(e) => {
-                this.setState({
-                  newTodo: e.target.value,
-                  isDisabled: e.target.value.length > 0 ? false : true,
-                });
-                
-              }}
-              style={{textTransform:'capitalize'}}
+              onChange={this.handleInputValueChange}
+              style={{ textTransform: "capitalize" }}
             />
           </div>
           <div>
             <button
               disabled={this.state.isDisabled}
               style={{ backgroundColor: "lightBlue" }}
-              onClick={(e)=>alert('Do you want to add new task "' +this.state.newTodo+'" to your list?')}
+              onClick={(e) =>
+                alert(
+                  'Do you want to add new task "' +
+                    this.state.newTodo +
+                    '" to your list?'
+                )
+              }
             >
               Add
             </button>
