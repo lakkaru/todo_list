@@ -2,19 +2,29 @@ import React, { Component } from "react";
 
 export default class AddTodo extends Component {
   state = {
-    newTodo: "",
-    isDisabled: true,
+    newToDo: "",
+    isError: true,
   };
   handleInputValueChange = (e) => {
     this.setState({
-      newTodo: e.target.value,
-      isDisabled: e.target.value.length > 0 ? false : true,
+      newToDo: e.target.value,
+      isError: (e.target.value).trim().length > 0 ? false : true,
     });
   };
+
+  handleAddNewToDo = () => {
+    let { newToDo } = this.state;
+    if (newToDo.trim()) {
+      this.props.addNewToDo(newToDo);
+      this.setState({newToDo:''})
+    } else {
+      // this.setState({isError:true});
+    }
+  };
   render() {
-    const {addNewToDo}=this.props;
+    // const { addNewToDo } = this.props;
     // console.log(addNewToDo);
-    
+
     return (
       <div>
         <div style={{ display: "flex", gap: "50px" }}>
@@ -22,27 +32,30 @@ export default class AddTodo extends Component {
             <input
               type="text"
               onChange={this.handleInputValueChange}
-              style={{ textTransform: "capitalize" }}
+              style={{ textTransform: "capitalize" }} value={this.state.newToDo}
             />
           </div>
           <div>
             <button
-              disabled={this.state.isDisabled}
+              disabled={this.state.isError}
               style={{ backgroundColor: "lightBlue" }}
-              onClick={() =>
-                addNewToDo(this.state.newTodo)
-              }
+              onClick={this.handleAddNewToDo}
             >
               Add
             </button>
           </div>
           {/* <AddButton isDisabled={this.state.isDisabled} /> */}
         </div>
-        <br />
+
         <div
-          style={{ height: "1em", textTransform: "capitalize", color: "teal" }}
+          style={{
+            height: "1em",
+            textTransform: "capitalize",
+            color: "teal",
+            fontSize: ".5rem",
+          }}
         >
-          <p>{this.state.newTodo}</p>
+          {this.state.isError ? <p>Please Enter new ToDo</p> : ""}
         </div>
       </div>
     );
